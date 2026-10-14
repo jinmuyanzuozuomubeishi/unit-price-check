@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="粘贴商品规格和到手价，比较每升、每公斤或每件价格。免费开源，在浏览器本地计算。">
+  <meta name="color-scheme" content="light">
+  <title>这包到底便不便宜 · 日用品比价</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><a class="brand" href="./index.html">价 / 格</a><span class="local">本机计算 · 免费开源</span></header>
+    <section class="intro">
+      <p class="eyebrow">买得明白一点</p>
+      <h1>这包到底<br><span>便不便宜？</span></h1>
+      <p>大包装未必更划算。把规格和到手价放在一起，算出真正的单位价格。</p>
+    </section>
+    <div class="workspace">
+      <section class="panel" aria-labelledby="input-title">
+        <div class="section-heading"><h2 id="input-title">01 / 添加商品</h2><button id="sample" type="button" class="text-button">试试牛奶示例 ↗</button></div>
+        <label for="paste">复制规格和价格</label>
+        <textarea id="paste" maxlength="500" placeholder="例如：全脂牛奶 250ml×24盒，券后59.9元" rows="3"></textarea>
+        <button id="parse" type="button" class="secondary">识别规格与价格</button>
+        <p class="hint">支持 ml / L、g / kg、件 / 颗 / 节，以及“250ml×6盒×4提”。识别后请核对。</p>
+        <div id="message" role="status" aria-live="polite"></div>
+        <form id="product-form">
+          <label for="name">商品名称</label><input id="name" maxlength="80" required placeholder="例如：牛奶 A">
+          <div class="fields">
+            <div><label for="price">到手总价（元）</label><input id="price" type="number" min="0" max="100000000" step="0.01" required placeholder="59.90"></div>
+            <div><label for="quantity">实际件数（含赠品）</label><input id="quantity" type="number" min="1" max="1000000" step="1" value="1" required></div>
+          </div>
+          <div class="fields">
+            <div><label for="amount">单件规格</label><input id="amount" type="number" min="0.000001" max="1000000000" step="any" required placeholder="250"></div>
+            <div><label for="unit">单位</label><select id="unit"><option value="ml">毫升 ml</option><option value="l">升 L</option><option value="g">克 g</option><option value="kg">公斤 kg</option><option value="piece">件 / 颗 / 节</option></select></div>
+          </div>
+          <p class="hint">电池可填：单件规格 1、单位“件”、实际件数 7。总价请计入运费并扣除实际可用优惠。</p>
+          <button class="primary" type="submit">确认并加入比较 <span>＋</span></button>
+        </form>
+      </section>
+      <section class="panel results" aria-labelledby="results-title">
+        <div class="section-heading"><h2 id="results-title">02 / 比一比</h2><button id="clear" type="button" class="text-button">清空</button></div>
+        <p class="hint">相同计量类型分组比较；请自行确认商品品质、用途和规格可比。</p>
+        <div id="results" aria-live="polite"></div>
+        <p id="storage-note" class="hint">比较记录保存在当前浏览器，可随时清空。</p>
+      </section>
+    </div>
+    <footer><p>只比较价格，不判断品质。重量、容量与件数互不换算；所有价格均为人民币。</p><p>无需注册 · 无外部接口 · MIT 开源</p></footer>
+  </main>
+</body>
+</html>

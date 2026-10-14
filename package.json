@@ -1,0 +1,9 @@
+{
+  "name": "unit-price-check",
+  "version": "1.0.0",
+  "private": true,
+  "description": "这包到底便不便宜：浏览器本地运行的日用品单位价比较工具",
+  "license": "MIT",
+  "scripts": { "test": "node --test tests/core.test.js" },
+  "engines": { "node": ">=20" }
+}
